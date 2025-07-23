@@ -1,8 +1,10 @@
-import { state } from '../app.state';
+import { getState } from '../app.state';
 import { renderApp } from './App';
 
 export function Search() {
   const searchBox = document.createElement('form');
+  //get current state
+  const state=getState();
   searchBox.innerHTML = `
     <div class='search'>
        <input id="searchBox" placeholder="Search"/>
@@ -30,15 +32,11 @@ export function Search() {
   //cancel
   const handleCancel = () => {
     input.value = '';
-    //console.log(currentData);
-    //console.log(state);
-    //take all data form local storage directly
     state.items = currentData;
     renderApp();
   };
   //clear
   const handleChange = (e) => {
-    console.log(e.target.value)
     if (input.value !== '') {
       cancelBtn.style.display = 'block';
     } else {

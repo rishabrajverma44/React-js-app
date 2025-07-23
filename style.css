@@ -1,111 +1,258 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+* {
+  box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
+  font-family: sans-serif;
 }
-
-body {
-  margin: 0;
+.app {
+  background-color: beige;
 }
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.main-div {
   display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  width: 100%;
+}
+
+/*Header */
+.header > p {
+  font-size: 20px;
+  line-height: 0.8;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  height: 80vh;
+  gap: 15px;
 }
 
-button {
-  width: auto;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.2em 1.2em;
-  font-size: 0.8em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+#applicationForm {
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
 }
-button:hover {
-  border-color: #554848;
-  background-color: #d4d4d4;
+#applicationForm input,
+#applicationForm select {
+  box-shadow: none;
+  padding: 5px;
+  width: 100%;
 }
 
-/* form css */
-.form {
-  padding: 0;
-  margin-top: 15px;
-  margin-bottom: 15px;
+.left {
+  flex: 0 0 20%;
 }
-input {
-  margin-top: 0;
-  height: 26px;
-  border: 1px solid black;
-  border-radius: 4px;
+.right {
+  flex: 0 0 80%;
 }
-.counter {
-  margin-top: 0%;
-  margin-bottom: 5px;
-  font-size: larger;
+.left,
+.right {
+  background-color: white;
+  min-height: 85vh;
+  border-radius: 7px;
+  padding: 7px;
+}
+.header {
+  padding-left: 15px;
+  font-size: xx-large;
+}
+#statusCounts {
   text-align: center;
 }
 
-/*search*/
-.search {
+form input,
+form select {
+  height: 32px;
+  width: 250px;
+  line-height: 32px;
+  border-radius: 8px;
+  border: 1px solid black;
+  font-size: medium;
+  background-color: white;
+}
+#notes {
+  padding: 2px;
+  width: 100%;
+  font-size: medium;
+}
+.validation-error {
+  line-height: 1;
+  font-size: small;
+  display: none;
+  color: red;
+}
+#jobType,
+#status {
+  line-height: 18px;
+}
+/*Button CSS */
+#submitBtn {
+  background-color: rgb(10, 10, 10);
+  color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+#submitBtn:hover {
+  background-color: rgb(109, 109, 109);
+  cursor: pointer;
+}
+button {
+  background-color: rgb(10, 10, 10);
+  color: white;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 14px;
+  font-size: 12px;
+}
+button:hover {
+  background-color: rgb(109, 109, 109);
+  cursor: pointer;
+}
+
+/* table css */
+.searchBox {
   position: relative;
   width: 300px;
   margin-top: 4px;
 }
-#cancel {
-  /* display: none; */
-  position: absolute;
-  right: 130px;
-  top: 3px;
-  cursor: pointer;
-  color: red;
-  border: none;
-  width: 20px;
-  padding-inline-start: 5px;
+#searchInput {
+  box-shadow: none;
+  padding: 2px;
+  padding-left: 10px;
+  border: 1px solid;
+  width: 300px;
+  border-radius: 8px;
+  height: 30px;
 }
 
-/* table css */
+#searchInput:not(:placeholder-shown) + #clearBtn {
+  display: block;
+}
+#clearBtn {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  cursor: pointer;
+  color: red;
+}
+table {
+  margin-top: 10px;
+  width: 100%;
+  border: 1px solid black;
+}
+.company {
+  padding: 0;
+  text-align: start;
+}
+td {
+  padding: 3px;
+  text-align: start;
+}
+tr {
+  border: 1px solid black;
+}
 .table-main {
+  flex: 0 0 80%;
   width: 100%;
   overflow-x: auto;
 }
+th {
+  border-bottom: 2px solid black;
+  padding: 8px;
+  text-align: start;
+}
 table {
-  margin-top: 5px;
-  border: 1px solid black;
   border-collapse: collapse;
 }
-table > thead > tr > th,
-td {
-  min-width: 140px;
-  border: 1px solid black;
+button.edit,
+button.delete {
+  margin-right: 5px;
+}
+#clearBtn {
+  display: none;
+}
+/*edit delete btn */
+.delete,
+.edit {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 8px;
+  width: 70px;
+  height: 23px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 2px bisque;
+}
+.edit {
+  background-color: rgb(243, 230, 185);
+}
+.delete {
+  background-color: rgb(255, 208, 208);
+}
+.noApplication {
+  text-align: center;
+  padding: 50px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #0d0d0e;
-    background-color: #ffffff;
-  }
-
-  button {
-    background-color: #f9f9f9;
-    border: 1px solid;
-  }
+/* status css */
+.status-applied {
+  background-color: #f0f8ff;
+}
+.status-interviewing {
+  background-color: #fffacd;
+}
+.status-rejected {
+  background-color: #c8e6c9;
 }
 
 /* media queies */
 @media screen and (max-width: 600px) {
-  .action {
-    padding: 2px;
-    text-align: center;
+  .main-div {
+    flex-direction: column;
+  }
+  form,
+  .table-main {
+    flex: 0 0 100%;
+  }
+  .header {
+    font-size: x-large;
+  }
+  .actionBox {
     display: flex;
+    flex-direction: row;
+  }
+  .company {
+    min-width: 120px;
+  }
+  #date {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .main-div {
+    flex-direction: column;
+  }
+  form,
+  .table-main {
+    flex: 0 0 100%;
+    padding: 10px;
+  }
+  .header {
+    font-size: x-large;
+    text-align: center;
+  }
+  .header > p {
+    font-size: small;
     gap: 5px;
+  }
+  .delete {
+    margin-top: 2px;
+  }
+  #date {
+    min-width: 100px;
   }
 }

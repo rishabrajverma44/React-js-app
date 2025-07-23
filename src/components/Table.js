@@ -1,54 +1,59 @@
-import { state } from "../app.state";
-import { saveToStorage } from "../app.storage.js";
-import { renderApp } from "./App.js";
+import { getState, setFormEdit, deleteForm } from '../app.state';
+import { renderApp } from './App.js';
 
 export function Table() {
-  const tableDiv = document.createElement("div");
-  tableDiv.className="table-main"
+  //get current state
+  const state = JSON.parse(getState());
+  const tableDiv = document.createElement('div');
+  tableDiv.className = 'table-main';
   tableDiv.innerHTML = `
   <table>
     <thead>
-      <tr><th>Title</th><th>Actions</th></tr>
+      <tr><th>Company</th><th>Role</th><th>Job-Type</th><th>Location</th><th>Date</th><th>status</th><th>notes</th><th>Actions</th></tr>
     </thead>
     <tbody>
       ${state.items
         .map(
           (item) => `
         <tr>
-          <td>${item.title}</td>
+          <td>${item.company}</td>
+          <td>${item.role}</td>
+          <td>${item.jobType}</td>
+          <td>${item.location === '' ? '####' : item.location}</td>
+          <td>${item.date}</td>
+          <td style="color:${
+            item.status === 'Rejected' ? 'red' : item.status === 'Hired' ? 'green' : ''
+          }">${item.status}</td>
+          <td>${item.notes}</td>
           <td class="action">
-            <button data-id=${item.id} class="edit-btn">Edit</button>
-            <button data-id=${item.id} class="delete-btn">Delete</button>
+            <button data-id=${item.Id} class="edit-btn">Edit</button>
+            <button data-id=${item.Id} class="delete-btn">Delete</button>
           </td>
         </tr>`
         )
-        .join("")}</tbody>
-     </table>`;
+        .join('')}</tbody>
+     </table>
+     `;
 
-  tableDiv.querySelectorAll(".edit-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+  if (state.items.length === 0) {
+    tableDiv.style.display = 'none';
+  }
+
+  tableDiv.querySelectorAll('.edit-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
       const id = e.target.dataset.id;
-      const item = state.items.find((item) => item.id === id);
-      if (item) {
-        state.form = {
-          editId: item.id,
-          title: item.title,
-        };
+      if (id) {
+        setFormEdit(id);
         renderApp();
       }
     });
   });
 
-  tableDiv.querySelectorAll(".delete-btn").forEach((deleteBtn) => {
-    deleteBtn.addEventListener("click", (e) => {
-      const id = e.target.dataset.id;
-      const item = state.items.find((item) => {
-        return item.id === id;
-      });
-
-      if (item) {
-        state.items = state.items.filter((item) => item.id !== id);
-        saveToStorage(state.items);
+  tableDiv.querySelectorAll('.delete-btn').forEach((deleteBtn) => {
+    deleteBtn.addEventListener('click', (e) => {
+      if (confirm('delete ?')) {
+        const id = e.target.dataset.id;
+        deleteForm(id);
         renderApp();
       }
     });
