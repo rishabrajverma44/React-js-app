@@ -13,7 +13,7 @@ export function Header() {
   const rejected = state.items.filter((item) => item.status === 'Rejected').length;
 
   Header.innerHTML = `<div class="header"><h4>Job Application Tracker</h4>
-                         <p><span>Job Application :${total}</span> <span>Applied :${applied}</span> <span>Interviewing :${interviewing}</span> <span>Hired :${hired}</span> <span>Rejected :${rejected}</span></p>
+                         <p><span>Job Application : ${total}</span> <span>Applied : ${applied}</span> <span>Interviewing : ${interviewing}</span> <span>Hired : ${hired}</span> <span>Rejected : ${rejected}</span></p>
                        </div>`;
 
   return Header;

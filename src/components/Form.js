@@ -94,6 +94,7 @@ export function Form() {
 
   jobType.addEventListener('change', toggleLocationField);
   toggleLocationField();
+  erorLocation.style.display = 'none';
 
   // Submit event trigger
   form.addEventListener('submit', (e) => {
