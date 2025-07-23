@@ -35,6 +35,7 @@ export function Form() {
 
       <label for="date">Application Date:</label>
       <input type="date" id="date" value="${state.form.date || ''}" />
+      <span class="validation-error" id="erorDate">Select date</span>
 
       <label for="status">Application Status:</label>
       <select id="status" class="form-control">
@@ -75,6 +76,7 @@ export function Form() {
   const erorJobRole = form.querySelector('#erorJobRole');
   const erorJobType = form.querySelector('#erorJobType');
   const erorLocation = form.querySelector('#erorLocation');
+  const erorDate = form.querySelector('#erorDate');
   const erorJobStatus = form.querySelector('#erorJobStatus');
 
   // Hide error spans innitially
@@ -87,11 +89,12 @@ export function Form() {
     location.disabled = isRemote;
     location.style.display = isRemote ? 'none' : 'block';
     locationLabel.style.display = isRemote ? 'none' : 'block';
-    //erorLocation.style.display = isRemote ? 'none' : 'block';
+    erorLocation.style.display = isRemote || jobType.value === '' ? 'none' : 'block';
   };
 
   jobType.addEventListener('change', toggleLocationField);
   toggleLocationField();
+  erorLocation.style.display = 'none';
 
   // Submit event trigger
   form.addEventListener('submit', (e) => {
@@ -111,6 +114,7 @@ export function Form() {
 
     showError(company, erorCompany);
     showError(role, erorJobRole);
+    showError(date, erorDate);
     if (!jobType.value) {
       erorJobType.style.display = 'block';
       jobType.style.borderColor = 'red';
